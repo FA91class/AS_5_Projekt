@@ -22,6 +22,5 @@ namespace Impf_App.Server.Models
         public string Place { get; set; }
 
         public string Doctor { get; set; }
-
     }
 }
