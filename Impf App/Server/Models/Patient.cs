@@ -7,5 +7,22 @@ namespace Impf_App.Server.Models
 {
     public class Patient
 {
-}
+        public string P_InsuranceNr { get; set; }
+
+        public string PF_Insurance { get; set; }
+
+        public string Sex { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public DateTime BirtHDate { get; set; }
+
+        public string AdrNmbr { get; set; }
+
+        public int PLZ { get; set; }
+
+        public string Town { get; set; }
+    }
 }
