@@ -7,9 +7,9 @@ namespace Impf_App.Server.Models
 {
     public class Patient
 {
-        public string P_InsuranceNr { get; set; }
+        public Guid P_InsuranceNr { get; set; }
 
-        public string PF_Insurance { get; set; }
+        public Insurance PF_Insurance { get; set; }
 
         public string Sex { get; set; }
 
