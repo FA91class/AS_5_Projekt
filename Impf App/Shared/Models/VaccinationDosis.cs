@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Impf_App.Server.Models
+namespace Impf_App.Shared.Models
 {
     public class VaccinationDosis
-{
+    {
         public Guid P_Dosis_Id { get; set; }
 
         public Vaccine F_Vaccine { get; set; }

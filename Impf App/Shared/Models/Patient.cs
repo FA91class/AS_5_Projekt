@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Impf_App.Server.Models
+namespace Impf_App.Shared.Models
 {
     public class Patient
-{
+    {
         public Guid P_InsuranceNr { get; set; }
 
         public Insurance PF_Insurance { get; set; }
