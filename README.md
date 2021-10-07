@@ -3,6 +3,8 @@ Projekt des AS Halbjahr Nr. 5
 
 Erstellung einer Anwendung zur Impf-Datenbank 
 
+[![CodeFactor](https://www.codefactor.io/repository/github/fa91class/as_5_projekt/badge)](https://www.codefactor.io/repository/github/fa91class/as_5_projekt)
+
 Die folgende Datenbank steht als SQL-Script zur Verfügung (s. Moodle-Kurs): ![](https://lh6.googleusercontent.com/M7gBOVl5QMJ4-AhdpFF6G7Mm_Ohd6L6qfDF2Tajn66MTwArWVxu6KiJ_EPvbxIIhWmk474c4_-Kp8JDmOlnSmrVU4mvALEe_HSTFqTnLYWac6jUNXwaOz0mq_d3-vjd4c091xV6n=s0)
 
 Mindestanforderungen an die Anwendung („Anwendungsfälle") 
