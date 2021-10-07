@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Impf_App.Models.Insurance>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdrNmbr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PLZ)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Town)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdrNmbr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PLZ)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Town)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.P_InssuranceId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.P_InssuranceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.P_InssuranceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
