@@ -1,0 +1,11 @@
+﻿global using System;
+global using System.ComponentModel.DataAnnotations;
+global using Impf_App.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Logging;
+global using System.Diagnostics;
+global using System.Linq;
+global using System.Threading.Tasks;
+global using Microsoft.EntityFrameworkCore;
+global using Impf_App.Data;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
