@@ -46,6 +46,7 @@ namespace Impf_App.Controllers
         // GET: Patients/Create
         public IActionResult Create()
         {
+            PopulateInsuranceDropDown();
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace Impf_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("P_InsuranceNr,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
+        public async Task<IActionResult> Create([Bind("P_InsuranceNr,PF_InsuranceP_InssuranceId,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +64,7 @@ namespace Impf_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
             return View(patient);
         }
 
@@ -79,6 +81,7 @@ namespace Impf_App.Controllers
             {
                 return NotFound();
             }
+            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
             return View(patient);
         }
 
@@ -87,7 +90,7 @@ namespace Impf_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("P_InsuranceNr,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
+        public async Task<IActionResult> Edit(Guid id, [Bind("P_InsuranceNr,PF_InsuranceP_InssuranceId,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
         {
             if (id != patient.P_InsuranceNr)
             {
@@ -114,6 +117,7 @@ namespace Impf_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
             return View(patient);
         }
 
@@ -146,6 +150,13 @@ namespace Impf_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private void PopulateInsuranceDropDown(object selectedInsurance = null)
+        {
+            var insuranceQuery = from d in _context.Insurances
+                                 orderby d.Description
+                                 select d;
+            ViewBag.PF_Insurance = new SelectList(insuranceQuery.AsNoTracking(), "P_InssuranceId", "Description", selectedInsurance);
+        }
         private bool PatientExists(Guid id)
         {
             return _context.Patients.Any(e => e.P_InsuranceNr == id);

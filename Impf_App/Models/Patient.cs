@@ -8,6 +8,9 @@ namespace Impf_App.Models
         [Key]
         public Guid P_InsuranceNr { get; set; }
 
+        //[Key]
+        public Guid PF_InsuranceP_InssuranceId { get; set; }
+
         public Insurance PF_Insurance { get; set; }
 
         public string Sex { get; set; }
