@@ -14,6 +14,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.F_Vaccine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.F_Patient)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ProductionDate)
             </th>
             <th>
@@ -31,6 +37,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.F_Vaccine.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.F_Patient.FullName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ProductionDate)
             </td>

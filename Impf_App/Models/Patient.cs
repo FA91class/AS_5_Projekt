@@ -10,7 +10,6 @@ namespace Impf_App.Models
 
         //[Key]
         public Guid PF_InsuranceP_InssuranceId { get; set; }
-
         public Insurance PF_Insurance { get; set; }
 
         public string Sex { get; set; }
@@ -18,6 +17,8 @@ namespace Impf_App.Models
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public string FullName { get { return LastName + ", " + FirstName; } }
 
         public DateTime BirtHDate { get; set; }
 

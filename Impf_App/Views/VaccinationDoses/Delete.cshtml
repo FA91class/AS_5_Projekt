@@ -12,6 +12,24 @@
     <h4>VaccinationDosis</h4>
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.P_Dosis_Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.P_Dosis_Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.F_Vaccine)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.F_Vaccine.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.F_Patient)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.F_Patient.FullName)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ProductionDate)
         </dt>

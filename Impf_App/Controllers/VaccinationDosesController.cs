@@ -46,6 +46,8 @@ namespace Impf_App.Controllers
         //GET: VaccinationDoses/Create
         public IActionResult Create()
         {
+            PopulateVaccineDropDown();
+            PopulatePatientDropDown();
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace Impf_App.Controllers
         //To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("P_Dosis_Id,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Create([Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +64,8 @@ namespace Impf_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
+            PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
         }
 
@@ -78,13 +82,15 @@ namespace Impf_App.Controllers
             {
                 return NotFound();
             }
+            PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
+            PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
         }
 
         //POST: VaccinationDoses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
         {
             if (id != vaccinationDosis.P_Dosis_Id)
             {
@@ -111,6 +117,8 @@ namespace Impf_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
+            PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
         }
 
@@ -142,6 +150,20 @@ namespace Impf_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private void PopulateVaccineDropDown(object selectedVaccine = null)
+        {
+            var vaccineQuery = from v in _context.Vaccines
+                               orderby v.Description
+                               select v;
+            ViewBag.F_Vaccine = new SelectList(vaccineQuery.AsNoTracking(), "P_VaccineId", "Description", selectedVaccine);
+        }
+        private void PopulatePatientDropDown(object selectedPatient = null)
+        {
+            var patientQuery = from p in _context.Patients
+                               orderby p.LastName, p.FirstName
+                               select p;
+            ViewBag.F_Patient = new SelectList(patientQuery.AsNoTracking(), "P_InsuranceNr", "FullName", selectedPatient);
+        }
         private bool VaccinationDosisExists(Guid id)
         {
             return _context.VaccinationDoses.Any(e => e.P_Dosis_Id == id);
