@@ -1,42 +1,34 @@
-﻿using Impf_App.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Impf_App.Data;
 
-namespace Impf_App.Data
+public class ApplicationDbContext : IdentityDbContext
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
-		
-		public DbSet<Insurance> Insurances { get; set; }
+    }
 
-        public DbSet<Patient> Patients { get; set; }
+    public DbSet<Insurance> Insurances { get; set; }
 
-        public DbSet<VaccinationDosis> VaccinationDoses { get; set; }
+    public DbSet<Patient> Patients { get; set; }
 
-        public DbSet<Vaccine> Vaccines { get; set; }
+    public DbSet<VaccinationDosis> VaccinationDoses { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+    public DbSet<Vaccine> Vaccines { get; set; }
 
-            modelBuilder.Entity<Patient>()
-                .Navigation(p => p.PF_Insurance).AutoInclude();
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<VaccinationDosis>()
-                .Navigation(p => p.F_Insurance).AutoInclude();
+        modelBuilder.Entity<Patient>()
+            .Navigation(p => p.PF_Insurance).AutoInclude();
 
-            modelBuilder.Entity<VaccinationDosis>()
-                .Navigation(p => p.F_Patient).AutoInclude();
+        modelBuilder.Entity<VaccinationDosis>()
+            .Navigation(p => p.F_Insurance).AutoInclude();
 
-            modelBuilder.Entity<VaccinationDosis>()
-                .Navigation(p => p.F_Vaccine).AutoInclude();
-        }
+        modelBuilder.Entity<VaccinationDosis>()
+            .Navigation(p => p.F_Patient).AutoInclude();
+
+        modelBuilder.Entity<VaccinationDosis>()
+            .Navigation(p => p.F_Vaccine).AutoInclude();
     }
 }
