@@ -6,7 +6,9 @@
   "scripts": {
     "build": "npm run build:js && npm run build:css",
     "build:css": "sass ./src/sass/index.sass ./wwwroot/css/site.css",
-    "build:js": "webpack"
+    "build:css:watch": "sass --watch ./src/sass/index.sass ./wwwroot/css/site.css",
+    "build:js": "webpack",
+    "build:js:watch": "webpack --watch"
   },
   "repository": {
     "type": "git",

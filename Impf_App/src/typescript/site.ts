@@ -4,3 +4,6 @@
 // Write your TypeScript code.
 import "bootstrap"
 import "jquery"
+import { Dashboard } from "./classes/Dashboard";
+
+new Dashboard().init();

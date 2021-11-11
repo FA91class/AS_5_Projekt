@@ -1,2 +1,13 @@
 @import "site"
+@import "root"
+@import "mixin"
+@import "dashboard"
 @import "../../node_modules/bootstrap/scss/bootstrap.scss"
+
+h1, h2, h3, h4, h5
+    @include noselect
+
+#logo
+    @include noselect
+    width: 2em
+    height: auto
