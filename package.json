@@ -1,0 +1,33 @@
+{
+  "name": "as_5_projekt",
+  "version": "1.0.0",
+  "description": "Eine App zur verwaltung von Impfungen und Patienten.",
+  "main": "./Impf_App/wwroot/js/site.js",
+  "scripts": {
+    "build": "npm run build:js && npm run build:css",
+    "build:css": "sass ./src/sass/index.sass ./Impf_App/wwwroot/css/site.css",
+    "build:js": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FA91class/AS_5_Projekt.git"
+  },
+  "keywords": [
+    "Vaccine",
+    "c#",
+    "dotNet",
+    "typescript",
+    "sass",
+    "nodejs"
+  ],
+  "author": "FireRune, JosunLP",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/FA91class/AS_5_Projekt/issues"
+  },
+  "homepage": "https://github.com/FA91class/AS_5_Projekt#readme",
+  "devDependencies": {
+    "sass": "^1.43.4",
+    "typescript": "^4.4.4"
+  }
+}
