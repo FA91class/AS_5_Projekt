@@ -5,7 +5,9 @@ public class Patient
     [Key]
     public Guid P_InsuranceNr { get; set; }
 
-    public Insurance PF_Insurance { get; set; }
+        //[Key]
+        public Guid PF_InsuranceP_InssuranceId { get; set; }
+        public Insurance PF_Insurance { get; set; }
 
     public string Sex { get; set; }
 
@@ -13,7 +15,9 @@ public class Patient
 
     public string LastName { get; set; }
 
-    public DateTime BirtHDate { get; set; }
+        public string FullName { get { return LastName + ", " + FirstName; } }
+
+        public DateTime BirtHDate { get; set; }
 
     public string AdrNmbr { get; set; }
 
