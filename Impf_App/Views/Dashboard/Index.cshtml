@@ -1,0 +1,20 @@
+﻿@model Impf_App.Models.Dashboard
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div id="dashboard" class="container">
+    <div id="dashboardSelect">
+        <button class="btn" id="triggerDayDashboard">Day</button>
+        <button class="btn" id="triggerWeekDashboard">Week</button>
+    </div>
+    <div id="dayDashboard">
+        @await Html.PartialAsync("_DayDashboard", Model)
+    </div>
+    <div id="weekDashboard">
+        @await Html.PartialAsync("_WeekDashboard", Model)
+    </div>
+</div>
+
