@@ -61,26 +61,13 @@ public class PatientsController : Controller
     {
         if (id == null)
         {
-            PopulateInsuranceDropDown();
-            return View();
+            return NotFound();
         }
 
-        // POST: Patients/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("P_InsuranceNr,PF_InsuranceP_InssuranceId,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
+        var patient = await _context.Patients.FindAsync(id);
+        if (patient == null)
         {
-            if (ModelState.IsValid)
-            {
-                patient.P_InsuranceNr = Guid.NewGuid();
-                _context.Add(patient);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
-            return View(patient);
+            return NotFound();
         }
         return View(patient);
     }
@@ -94,26 +81,10 @@ public class PatientsController : Controller
     {
         if (id != patient.P_InsuranceNr)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var patient = await _context.Patients.FindAsync(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
-            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
-            return View(patient);
+            return NotFound();
         }
 
-        // POST: Patients/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("P_InsuranceNr,PF_InsuranceP_InssuranceId,Sex,FirstName,LastName,BirtHDate,AdrNmbr,PLZ,Town")] Patient patient)
+        if (ModelState.IsValid)
         {
             try
             {
@@ -131,8 +102,7 @@ public class PatientsController : Controller
                     throw;
                 }
             }
-            PopulateInsuranceDropDown(patient.PF_InsuranceP_InssuranceId);
-            return View(patient);
+            return RedirectToAction(nameof(Index));
         }
         return View(patient);
     }
@@ -152,17 +122,7 @@ public class PatientsController : Controller
             return NotFound();
         }
 
-        private void PopulateInsuranceDropDown(object selectedInsurance = null)
-        {
-            var insuranceQuery = from d in _context.Insurances
-                                 orderby d.Description
-                                 select d;
-            ViewBag.PF_Insurance = new SelectList(insuranceQuery.AsNoTracking(), "P_InssuranceId", "Description", selectedInsurance);
-        }
-        private bool PatientExists(Guid id)
-        {
-            return _context.Patients.Any(e => e.P_InsuranceNr == id);
-        }
+        return View(patient);
     }
 
     // POST: Patients/Delete/5

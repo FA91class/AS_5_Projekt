@@ -19,8 +19,11 @@ public class ApplicationDbContext : IdentityDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<VaccinationDosis>()
-                .Navigation(p => p.F_Patient).AutoInclude();
+        modelBuilder.Entity<Patient>()
+            .Navigation(p => p.PF_Insurance).AutoInclude();
+
+        modelBuilder.Entity<VaccinationDosis>()
+            .Navigation(p => p.F_Insurance).AutoInclude();
 
         modelBuilder.Entity<VaccinationDosis>()
             .Navigation(p => p.F_Patient).AutoInclude();

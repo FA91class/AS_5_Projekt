@@ -60,7 +60,7 @@ namespace Impf_App.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PF_InsuranceP_InssuranceId")
+                    b.Property<Guid?>("PF_InsuranceP_InssuranceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("PLZ")
@@ -88,10 +88,13 @@ namespace Impf_App.Data.Migrations
                     b.Property<string>("Doctor")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("F_PatientP_InsuranceNr")
+                    b.Property<Guid?>("F_InsuranceP_InssuranceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("F_VaccineP_VaccineId")
+                    b.Property<Guid?>("F_PatientP_InsuranceNr")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("F_VaccineP_VaccineId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Place")
@@ -104,6 +107,8 @@ namespace Impf_App.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("P_Dosis_Id");
+
+                    b.HasIndex("F_InsuranceP_InssuranceId");
 
                     b.HasIndex("F_PatientP_InsuranceNr");
 
@@ -339,26 +344,26 @@ namespace Impf_App.Data.Migrations
                 {
                     b.HasOne("Impf_App.Models.Insurance", "PF_Insurance")
                         .WithMany()
-                        .HasForeignKey("PF_InsuranceP_InssuranceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PF_InsuranceP_InssuranceId");
 
                     b.Navigation("PF_Insurance");
                 });
 
             modelBuilder.Entity("Impf_App.Models.VaccinationDosis", b =>
                 {
+                    b.HasOne("Impf_App.Models.Insurance", "F_Insurance")
+                        .WithMany()
+                        .HasForeignKey("F_InsuranceP_InssuranceId");
+
                     b.HasOne("Impf_App.Models.Patient", "F_Patient")
                         .WithMany()
-                        .HasForeignKey("F_PatientP_InsuranceNr")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("F_PatientP_InsuranceNr");
 
                     b.HasOne("Impf_App.Models.Vaccine", "F_Vaccine")
                         .WithMany()
-                        .HasForeignKey("F_VaccineP_VaccineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("F_VaccineP_VaccineId");
+
+                    b.Navigation("F_Insurance");
 
                     b.Navigation("F_Patient");
 
