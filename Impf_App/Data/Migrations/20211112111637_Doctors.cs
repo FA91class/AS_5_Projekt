@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Impf_App.Data.Migrations
 {
-    public partial class AddingDoctors : Migration
+    public partial class Doctors : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,13 @@ namespace Impf_App.Data.Migrations
                 table: "VaccinationDoses",
                 type: "uniqueidentifier",
                 nullable: true);
+
+            migrationBuilder.AddColumn<Guid>(
+                name: "F_DoctorP_DoctorId",
+                table: "VaccinationDoses",
+                type: "uniqueidentifier",
+                nullable: false,
+                defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.CreateTable(
                 name: "Doctors",
@@ -61,6 +68,10 @@ namespace Impf_App.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "DoctorId",
+                table: "VaccinationDoses");
+
+            migrationBuilder.DropColumn(
+                name: "F_DoctorP_DoctorId",
                 table: "VaccinationDoses");
 
             migrationBuilder.AddColumn<string>(

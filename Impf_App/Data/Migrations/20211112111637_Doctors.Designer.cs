@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Impf_App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211112092708_AddingDoctors")]
-    partial class AddingDoctors
+    [Migration("20211112111637_Doctors")]
+    partial class Doctors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,9 @@ namespace Impf_App.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("F_DoctorP_DoctorId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("F_PatientP_InsuranceNr")

@@ -7,6 +7,8 @@ public class VaccinationDosis
 
     public Guid F_VaccineP_VaccineId { get; set; }
 
+    public Guid F_DoctorP_DoctorId { get; set; }
+
     public Vaccine F_Vaccine { get; set; }
 
     public Guid F_PatientP_InsuranceNr { get; set; }

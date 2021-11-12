@@ -111,6 +111,9 @@ namespace Impf_App.Data.Migrations
                     b.Property<Guid?>("DoctorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("F_DoctorP_DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("F_PatientP_InsuranceNr")
                         .HasColumnType("uniqueidentifier");
 
