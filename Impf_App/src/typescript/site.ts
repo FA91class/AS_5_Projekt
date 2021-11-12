@@ -4,6 +4,8 @@
 // Write your TypeScript code.
 import "bootstrap"
 import "jquery"
+import "jquery-validation"
+import "jquery-validation-unobtrusive"
 import { Dashboard } from "./classes/Dashboard";
 
 new Dashboard().init();
