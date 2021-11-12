@@ -7,7 +7,7 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Sind sie sicher, dass sie den Eintrag löschen wollen?</h3>
 <div>
     <h4>VaccinationDosis</h4>
     <hr />
@@ -19,40 +19,40 @@
             @Html.DisplayFor(model => model.P_Dosis_Id)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.F_Vaccine)
+            Impfstoff
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.F_Vaccine.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.F_Patient)
+            Patient
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.F_Patient.FullName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductionDate)
+            Produktionsdatum
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ProductionDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VaccinationDate)
+            Impfdatum
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.VaccinationDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Place)
+            Impfort
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Place)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Doctor)
+            Arzt
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Doctor)
+            @Html.DisplayFor(model => model.Doctor.FullName)
         </dd>
     </dl>
     

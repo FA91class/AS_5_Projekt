@@ -1,4 +1,4 @@
-﻿@model Impf_App.Models.Insurance
+﻿@model Impf_App.Models.Doctor
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,37 +9,31 @@
 
 <h3>Sind sie sicher, dass sie den Eintrag löschen wollen?</h3>
 <div>
-    <h4>Versicherung</h4>
+    <h4>Arzt</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            Beschreibung
+            Vorname
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.FirstName)
         </dd>
         <dt class = "col-sm-2">
-            Adresse
+            Nachname
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.AdrNmbr)
+            @Html.DisplayFor(model => model.LastName)
         </dd>
         <dt class = "col-sm-2">
-            PLZ
+            Titel
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PLZ)
-        </dd>
-        <dt class = "col-sm-2">
-            Stadt
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Town)
+            @Html.DisplayFor(model => model.Title)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="P_InssuranceId" />
+        <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>
