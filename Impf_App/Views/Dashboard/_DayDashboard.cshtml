@@ -1,0 +1,56 @@
+﻿@model Impf_App.Models.Dashboard
+
+@{
+    ViewData["Title"] = "Tages Übersicht";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Impfstoff
+            </th>
+            <th>
+                Patient
+            </th>
+            <th>
+                Herstellungsdatum
+            </th>
+            <th>
+                Impfdatum
+            </th>
+            <th>
+                Ausführungs Ort
+            </th>
+            <th>
+                Doktor
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.DayList) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.F_Vaccine.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.F_Patient.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VaccinationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Place)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

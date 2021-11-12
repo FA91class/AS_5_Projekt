@@ -19,6 +19,9 @@ public class ApplicationDbContext : IdentityDbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Dashboard>()
+            .HasNoKey();
+
         modelBuilder.Entity<Patient>()
             .Navigation(p => p.PF_Insurance).AutoInclude();
 
