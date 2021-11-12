@@ -3,7 +3,7 @@
     public class Doctor
     {
         [Key]
-        public Guid Id { get; set; }
+        public Guid P_DoctorId { get; set; }
 
         public string FirstName { get; set; }
 

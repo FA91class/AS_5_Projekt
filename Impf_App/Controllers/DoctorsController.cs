@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Impf_App.Data;
-using Impf_App.Models;
-
-namespace Impf_App.Controllers
+﻿namespace Impf_App.Controllers
 {
     public class DoctorsController : Controller
     {
@@ -34,7 +24,7 @@ namespace Impf_App.Controllers
             }
 
             var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.P_DoctorId == id);
             if (doctor == null)
             {
                 return NotFound();
@@ -54,11 +44,11 @@ namespace Impf_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Title")] Doctor doctor)
+        public async Task<IActionResult> Create([Bind("P_DoctorId,FirstName,LastName,Title")] Doctor doctor)
         {
             if (ModelState.IsValid)
             {
-                doctor.Id = Guid.NewGuid();
+                doctor.P_DoctorId = Guid.NewGuid();
                 _context.Add(doctor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,9 +77,9 @@ namespace Impf_App.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,FirstName,LastName,Title")] Doctor doctor)
+        public async Task<IActionResult> Edit(Guid id, [Bind("P_DoctorId,FirstName,LastName,Title")] Doctor doctor)
         {
-            if (id != doctor.Id)
+            if (id != doctor.P_DoctorId)
             {
                 return NotFound();
             }
@@ -103,7 +93,7 @@ namespace Impf_App.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DoctorExists(doctor.Id))
+                    if (!DoctorExists(doctor.P_DoctorId))
                     {
                         return NotFound();
                     }
@@ -126,7 +116,7 @@ namespace Impf_App.Controllers
             }
 
             var doctor = await _context.Doctors
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.P_DoctorId == id);
             if (doctor == null)
             {
                 return NotFound();
@@ -148,7 +138,7 @@ namespace Impf_App.Controllers
 
         private bool DoctorExists(Guid id)
         {
-            return _context.Doctors.Any(e => e.Id == id);
+            return _context.Doctors.Any(e => e.P_DoctorId == id);
         }
     }
 }

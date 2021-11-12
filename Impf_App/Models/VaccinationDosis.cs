@@ -21,5 +21,5 @@ public class VaccinationDosis
 
     public string Place { get; set; }
 
-    public Doctor Doctor { get; set; }
+    public Doctor F_Doctor { get; set; }
 }

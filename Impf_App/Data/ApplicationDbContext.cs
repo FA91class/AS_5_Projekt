@@ -31,6 +31,6 @@ public class ApplicationDbContext : IdentityDbContext
             .Navigation(p => p.F_Vaccine).AutoInclude();
 
         modelBuilder.Entity<VaccinationDosis>()
-            .Navigation(p => p.Doctor).AutoInclude();
+            .Navigation(p => p.F_Doctor).AutoInclude();
     }
 }

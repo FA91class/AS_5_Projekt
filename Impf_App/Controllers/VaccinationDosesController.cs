@@ -36,9 +36,9 @@
         //GET: VaccinationDoses/Create
         public IActionResult Create()
         {
+            PopulateDoctorDropDown();
             PopulateVaccineDropDown();
             PopulatePatientDropDown();
-            PopulateDoctorDropDown();
             return View();
         }
 
@@ -46,7 +46,7 @@
         //To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Create([Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_DoctorP_DoctorId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place")] VaccinationDosis vaccinationDosis)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@
         //POST: VaccinationDoses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_DoctorP_DoctorId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place")] VaccinationDosis vaccinationDosis)
         {
             if (id != vaccinationDosis.P_Dosis_Id)
             {
@@ -149,7 +149,7 @@
             var doctorQuery = from d in _context.Doctors
                               orderby d.LastName, d.FirstName
                               select d;
-            ViewBag.F_Vaccine = new SelectList(doctorQuery.AsNoTracking(), "Id", "FullName", selectedDoctor);
+            ViewBag.F_Vaccine = new SelectList(doctorQuery.AsNoTracking(), "P_DoctorId", "FullName", selectedDoctor);
         }
 
         private void PopulateVaccineDropDown(object selectedVaccine = null)
