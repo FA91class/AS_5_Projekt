@@ -1,17 +1,16 @@
-﻿namespace Impf_App.Models
+﻿namespace Impf_App.Models;
+
+public class Doctor
 {
-    public class Doctor
-    {
-        [Key]
-        public Guid P_DoctorId { get; set; }
+    [Key]
+    public Guid P_DoctorId { get; set; }
 
-        public string FirstName { get; set; }
+    public string FirstName { get; set; }
 
-        public string LastName { get; set; }
+    public string LastName { get; set; }
 
-        public string FullName { get { return Title + " " + LastName + ", " + FirstName; } }
+    public string FullName { get { return Title + " " + LastName + ", " + FirstName; } }
 
-        public string Title { get; set; }
+    public string Title { get; set; }
 
-    }
 }
