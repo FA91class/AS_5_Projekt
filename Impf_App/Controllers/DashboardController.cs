@@ -18,23 +18,23 @@ public class DashboardController : Controller
         return View(dsb);
     }
 
-    public Dashboard GetDayDashboard(Dashboard dsb)
+    public Dashboard GetWeekDashboard(Dashboard dsb)
     {
         var patients = _context.VaccinationDoses.Where(
             p => p.VaccinationDate.Date < DateTime.Today.AddDays(8)
             && p.VaccinationDate.Date > DateTime.Today.AddDays(-1));
 
-        dsb.DayList = patients.ToList<VaccinationDosis>();
+        dsb.WeekList = patients.ToList<VaccinationDosis>();
 
         return dsb;
     }
 
-    public Dashboard GetWeekDashboard(Dashboard dsb)
+    public Dashboard GetDayDashboard(Dashboard dsb)
     {
         var patients = _context.VaccinationDoses.Where(
             p => p.VaccinationDate.Date == DateTime.Today.Date);
 
-        dsb.WeekList = patients.ToList<VaccinationDosis>();
+        dsb.DayList = patients.ToList<VaccinationDosis>();
 
         return dsb;
     }

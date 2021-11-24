@@ -4,6 +4,7 @@ using Impf_App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Impf_App.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211112111637_Doctors")]
+    partial class Doctors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,7 +26,7 @@ namespace Impf_App.Data.Migrations
 
             modelBuilder.Entity("Impf_App.Models.Doctor", b =>
                 {
-                    b.Property<Guid>("P_DoctorId")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -37,7 +39,7 @@ namespace Impf_App.Data.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("P_DoctorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Doctors");
                 });
@@ -108,6 +110,9 @@ namespace Impf_App.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("F_DoctorP_DoctorId")
                         .HasColumnType("uniqueidentifier");
 
@@ -128,7 +133,7 @@ namespace Impf_App.Data.Migrations
 
                     b.HasKey("P_Dosis_Id");
 
-                    b.HasIndex("F_DoctorP_DoctorId");
+                    b.HasIndex("DoctorId");
 
                     b.HasIndex("F_PatientP_InsuranceNr");
 
@@ -375,11 +380,9 @@ namespace Impf_App.Data.Migrations
 
             modelBuilder.Entity("Impf_App.Models.VaccinationDosis", b =>
                 {
-                    b.HasOne("Impf_App.Models.Doctor", "F_Doctor")
+                    b.HasOne("Impf_App.Models.Doctor", "Doctor")
                         .WithMany()
-                        .HasForeignKey("F_DoctorP_DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DoctorId");
 
                     b.HasOne("Impf_App.Models.Patient", "F_Patient")
                         .WithMany()
@@ -393,7 +396,7 @@ namespace Impf_App.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("F_Doctor");
+                    b.Navigation("Doctor");
 
                     b.Navigation("F_Patient");
 

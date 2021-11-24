@@ -8,4 +8,8 @@ import "jquery-validation"
 import "jquery-validation-unobtrusive"
 import { Dashboard } from "./classes/Dashboard";
 
-new Dashboard().init();
+try {
+    new Dashboard().init();
+} catch (error) {
+    
+}

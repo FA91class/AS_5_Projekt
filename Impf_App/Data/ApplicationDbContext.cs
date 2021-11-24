@@ -15,12 +15,11 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<Vaccine> Vaccines { get; set; }
 
+    public DbSet<Doctor> Doctors { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<Dashboard>()
-            .HasNoKey();
 
         modelBuilder.Entity<Patient>()
             .Navigation(p => p.PF_Insurance).AutoInclude();
@@ -30,5 +29,8 @@ public class ApplicationDbContext : IdentityDbContext
 
         modelBuilder.Entity<VaccinationDosis>()
             .Navigation(p => p.F_Vaccine).AutoInclude();
+
+        modelBuilder.Entity<VaccinationDosis>()
+            .Navigation(p => p.F_Doctor).AutoInclude();
     }
 }

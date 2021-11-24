@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Impf_App.Data;
-using Impf_App.Models;
-
-namespace Impf_App.Controllers
+﻿namespace Impf_App.Controllers
 {
     public class VaccinationDosesController : Controller
     {
@@ -24,7 +14,7 @@ namespace Impf_App.Controllers
         {
             return View(await _context.VaccinationDoses.ToListAsync());
         }
-        
+
         //GET: VaccinationDoses/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
@@ -46,6 +36,7 @@ namespace Impf_App.Controllers
         //GET: VaccinationDoses/Create
         public IActionResult Create()
         {
+            PopulateDoctorDropDown();
             PopulateVaccineDropDown();
             PopulatePatientDropDown();
             return View();
@@ -55,7 +46,7 @@ namespace Impf_App.Controllers
         //To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Create([Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_DoctorP_DoctorId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place")] VaccinationDosis vaccinationDosis)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +55,7 @@ namespace Impf_App.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            PopulateDoctorDropDown(vaccinationDosis.F_DoctorP_DoctorId);
             PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
             PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
@@ -82,6 +74,7 @@ namespace Impf_App.Controllers
             {
                 return NotFound();
             }
+            PopulateDoctorDropDown(vaccinationDosis.F_DoctorP_DoctorId);
             PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
             PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
@@ -90,7 +83,7 @@ namespace Impf_App.Controllers
         //POST: VaccinationDoses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place,Doctor")] VaccinationDosis vaccinationDosis)
+        public async Task<IActionResult> Edit(Guid id, [Bind("P_Dosis_Id,F_VaccineP_VaccineId,F_DoctorP_DoctorId,F_PatientP_InsuranceNr,ProductionDate,VaccinationDate,Place")] VaccinationDosis vaccinationDosis)
         {
             if (id != vaccinationDosis.P_Dosis_Id)
             {
@@ -117,6 +110,7 @@ namespace Impf_App.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            PopulateDoctorDropDown(vaccinationDosis.F_DoctorP_DoctorId);
             PopulateVaccineDropDown(vaccinationDosis.F_VaccineP_VaccineId);
             PopulatePatientDropDown(vaccinationDosis.F_PatientP_InsuranceNr);
             return View(vaccinationDosis);
@@ -150,6 +144,14 @@ namespace Impf_App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        private void PopulateDoctorDropDown(object selectedDoctor = null)
+        {
+            var doctorQuery = from d in _context.Doctors
+                              orderby d.LastName, d.FirstName
+                              select d;
+            ViewBag.F_Doctor = new SelectList(doctorQuery.AsNoTracking(), "P_DoctorId", "FullName", selectedDoctor);
+        }
+
         private void PopulateVaccineDropDown(object selectedVaccine = null)
         {
             var vaccineQuery = from v in _context.Vaccines
@@ -157,6 +159,7 @@ namespace Impf_App.Controllers
                                select v;
             ViewBag.F_Vaccine = new SelectList(vaccineQuery.AsNoTracking(), "P_VaccineId", "Description", selectedVaccine);
         }
+
         private void PopulatePatientDropDown(object selectedPatient = null)
         {
             var patientQuery = from p in _context.Patients
