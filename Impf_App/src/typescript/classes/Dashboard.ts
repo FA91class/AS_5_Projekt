@@ -28,7 +28,8 @@ export class Dashboard {
         dayDashboard.style.display = "block";
         dayDashboardTrigger.innerHTML = this._hideDay;
         dayDashboardTrigger.onclick = () => { this.toggleDayDashboard(); };
-
+        
+        console.log("Dashboard initialized");
     }
 
     private toggleWeekDashboard(): void {
