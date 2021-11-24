@@ -149,7 +149,7 @@
             var doctorQuery = from d in _context.Doctors
                               orderby d.LastName, d.FirstName
                               select d;
-            ViewBag.F_Vaccine = new SelectList(doctorQuery.AsNoTracking(), "P_DoctorId", "FullName", selectedDoctor);
+            ViewBag.F_Doctor = new SelectList(doctorQuery.AsNoTracking(), "P_DoctorId", "FullName", selectedDoctor);
         }
 
         private void PopulateVaccineDropDown(object selectedVaccine = null)
