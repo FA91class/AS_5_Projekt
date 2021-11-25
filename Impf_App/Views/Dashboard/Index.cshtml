@@ -10,10 +10,10 @@
         <button class="btn" id="triggerDayDashboard">Day</button>
         <button class="btn" id="triggerWeekDashboard">Week</button>
     </div>
-    <div id="dayDashboard">
+    <div id="dayDashboard" class="dashboard">
         @await Html.PartialAsync("_DayDashboard", Model)
     </div>
-    <div id="weekDashboard">
+    <div id="weekDashboard" class="dashboard">
         @await Html.PartialAsync("_WeekDashboard", Model)
     </div>
 </div>
