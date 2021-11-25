@@ -485,5 +485,5 @@ node_modules
 
 tsconfig.tsbuildinfo
 
-wwwroot/js
-wwwroot/css
+wwwroot/js/ 
+wwwroot/css/

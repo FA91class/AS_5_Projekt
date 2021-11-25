@@ -9,7 +9,7 @@
 
 <h3>Sind sie sicher, dass sie den Eintrag löschen wollen?</h3>
 <div>
-    <h4>Vaccine</h4>
+    <h4>Impfstoff</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -38,9 +38,9 @@
         </dd>
     </dl>
     
-    <form asp-action="Delete">
+    <form asp-action="Delete" class="form-delete">
         <input type="hidden" asp-for="P_VaccineId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a class="btn btn-primary" asp-action="Index">Back to List</a>
     </form>
 </div>

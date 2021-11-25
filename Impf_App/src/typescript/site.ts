@@ -4,12 +4,12 @@
 // Write your TypeScript code.
 import "bootstrap"
 import "jquery"
+import "@fortawesome/fontawesome-free/js/all.js"
 import "jquery-validation"
 import "jquery-validation-unobtrusive"
 import { Dashboard } from "./classes/Dashboard";
 
 try {
     new Dashboard().init();
-} catch (error) {
-    
+} catch (error) {   
 }
