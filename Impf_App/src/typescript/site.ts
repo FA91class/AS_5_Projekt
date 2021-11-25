@@ -11,5 +11,5 @@ import { Dashboard } from "./classes/Dashboard";
 
 try {
     new Dashboard().init();
-} catch (error) { 
+} catch (error) {
 }
