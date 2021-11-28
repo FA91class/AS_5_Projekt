@@ -1,10 +1,14 @@
 ﻿@model Impf_App.Models.Patient
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (SignInManager.IsSignedIn(User))
+{
 <h1>Delete</h1>
 
 <h3>Sind sie sicher, dass sie den Eintrag löschen wollen?</h3>
@@ -74,3 +78,8 @@
         <a class="btn btn-primary" asp-action="Index">Back to List</a>
     </form>
 </div>
+} else {
+    <div>
+        @await Html.PartialAsync("_NoSignIn", Model)
+    </div>
+}

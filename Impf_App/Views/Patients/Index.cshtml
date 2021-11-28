@@ -1,9 +1,14 @@
 ﻿@model IEnumerable<Impf_App.Models.Patient>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@if (SignInManager.IsSignedIn(User))
+{
 
 <h1>Index</h1>
 
@@ -76,3 +81,8 @@
 }
     </tbody>
 </table>
+} else {
+    <div>
+        @await Html.PartialAsync("_NoSignIn", Model)
+    </div>
+}

@@ -1,8 +1,13 @@
 ﻿@model Impf_App.Models.Dashboard
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Dashboard";
 }
+
+@if (SignInManager.IsSignedIn(User))
+{
 <h1>@ViewData["Title"]</h1>
 
 <div id="dashboard" class="container">
@@ -17,4 +22,8 @@
         @await Html.PartialAsync("_WeekDashboard", Model)
     </div>
 </div>
-
+} else {
+    <div>
+        @await Html.PartialAsync("_NoSignIn", Model)
+    </div>
+}
