@@ -1,10 +1,14 @@
 ﻿@model Impf_App.Models.Doctor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@if (SignInManager.IsSignedIn(User))
+{
 <h1>Edit</h1>
 
 <h4>Arzt</h4>
@@ -39,4 +43,8 @@
 <div>
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
-
+} else {
+    <div>
+        @await Html.PartialAsync("_NoSignIn", Model)
+    </div>
+}
